@@ -114,3 +114,6 @@ $ Getting: http://bbc.co.uk/news (schemas: og)
 {'og': {'section': 'Home', 'type': 'website', 'site_name': 'BBC News', 'image': '//m.files.bbci.co.uk/modules/bbc-morph-news-waf-page-meta/2.2.1/bbc_news_logo.png', 'locale': 'en_GB', 'url': 'http://www.bbc.co.uk/news', 'title': 'Home - BBC News', 'description': 'Visit BBC News for up-to-the-minute news, breaking news, video, audio and feature stories. BBC News provides trusted World and UK news as well as local and regional perspectives. Also entertainment, business, science, technology and health news.'}}
 ```
 
+#### Dependencies
+* requests
+* beautifulsoup4
