@@ -1,6 +1,7 @@
 # metatron
 HTML Meta tag parser, with emphasis on OpenGraph/Twitter Cards, and complex meta tag schemes.
 Supports Python 3.x and up.
+The Metatron object extends dict, and all the meta tag data is set within it.
 
 
 ## Straight to an example
@@ -10,7 +11,9 @@ Supports Python 3.x and up.
 This example collects top level meta tags without a schema:
 
 ```
-Metatron(url='https://www.bbc.co.uk')
+> mt = Metatron(url='https://www.bbc.co.uk')
+> mt.traverse()
+
 {
     'x-country': 'gb',
     'x-audience': 'Domestic',
@@ -19,11 +22,16 @@ Metatron(url='https://www.bbc.co.uk')
     'theme-color': 'bb1919',
     'msapplication-TileColor': '#bb1919'
 }
+
+> mt['x-country']
+> 'gb'
 ```
 
 #### Collect structures OpenGraph meta tags
 ```
-Metatron(url='https://www.bbc.co.uk', schemas=['og'])
+> mt = Metatron(url='https://www.bbc.co.uk', schemas=['og'])
+> mt.traverse()
+
 {
     'og': {
         'title': 'Home - BBC News',
@@ -40,9 +48,9 @@ Metatron(url='https://www.bbc.co.uk', schemas=['og'])
 }
 ```
 
-#### Supports opengraph arrays
+#### Supports opengraph arrays (and can receive content as input)
 ```
-With:
+> content = """
     <meta property="og:title" content="First title tag" />
     <meta property="og:title" content="Second title tag" />
     <meta property="og:description" content="description tag" />
@@ -58,8 +66,10 @@ With:
     <meta property="og:image:width" content="500" />
     <meta property="og:image:height" content="600" />
     <meta property="og:image:alt" content="Second image description" />
+"""
 
-Produces:
+> mt = Metatron(content=content, schemas=['og'])
+> mt.traverse()
 
 {
     'og': {
