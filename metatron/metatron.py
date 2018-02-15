@@ -2,6 +2,7 @@
 Read all html meta tags that comply with a scheme
 (i.e., og: for opengraph, twitter, govuk etc.).
 """
+from __future__ import absolute_import
 import re
 import requests
 from sys import argv
@@ -180,11 +181,12 @@ class Metatron(dict):
                     self[schema][key] = value
 
 
-if __name__ == 'main':
+if __name__ == '__main__':
     arg_count = len(argv)
     if arg_count > 1:
         url = argv[1]
         schemas = argv[2] if arg_count > 2 else []
+        print("Getting: {0} (schema: {1})".format(url, schemas))
         mt = Metatron(url=url, schemas=schemas)
         mt.traverse()
         print(mt)
