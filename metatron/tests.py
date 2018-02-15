@@ -1,7 +1,6 @@
 import unittest
 from metatron import Metatron, add_schema_spec
 from metatron.schemas import SCHEMAS
-from pprint import pprint
 
 
 class TestMetatron(unittest.TestCase):
@@ -14,7 +13,6 @@ class TestMetatron(unittest.TestCase):
             }
         }
         """
-        print("-----------------------------------------")
         content = """
             <meta name="description" content="Test Meta" />
             <meta property="someprop" content="Test Prop Value" />
@@ -29,30 +27,11 @@ class TestMetatron(unittest.TestCase):
         """
         mt = Metatron(content=content, schemas=['og'])
         mt.traverse()
-        pprint(mt)
         assert mt['og']['image']['image'] == 'http://example.com/ogp.jpg'
         assert mt['og']['image']['secure_url'] == 'https://secure.example.com/ogp.jpg'
 
 
     def test_opengraph_nested_array(self):
-        """
-        {
-            'image': {
-                'value': 'http://example.com/ogp.jpg',
-                'secure_url: 'https://secure.example.com/ogp.jpg',
-            }
-        }
-
-        image
-            image:secure_url
-            image:type
-            image:width
-        image
-            image:secure_url
-            image:type
-            image:width
-        """
-        print("-----------------------------------------")
         content = """
             <meta name="description" content="Test Meta" />
             <meta property="someprop" content="Test Prop Value" />
@@ -74,7 +53,6 @@ class TestMetatron(unittest.TestCase):
         """
         mt = Metatron(content=content, schemas=['og'])
         mt.traverse()
-        pprint(mt)
         assert len(mt['og']['image']) == 2
         assert mt['og']['image'][0]['image'] == 'http://example.com/ogp.jpg'
         assert mt['og']['image'][0]['secure_url'] == 'https://secure.example.com/ogp.jpg'
@@ -82,22 +60,7 @@ class TestMetatron(unittest.TestCase):
         assert mt['og']['title'][1] == 'The Two Image Store'
         assert mt['og']['image'][1]['width'] == '500'
 
-
     def test_opengraph_array(self):
-        """
-        {
-            'image': [
-                {
-                    'value': 'http://example.com/ogp1.jpg',
-                    'secure_url: 'https://secure.example.com/ogp1.jpg',
-                },
-                {
-                    'value': 'http://example.com/ogp2.jpg',
-                    'secure_url: 'https://secure.example.com/ogp2.jpg',
-                }
-            ]
-        }
-        """
         content = """
             <meta name="description" content="Test Meta" />
             <meta property="someprop" content="Test Prop Value" />
@@ -154,7 +117,6 @@ class TestMetatron(unittest.TestCase):
         """
         mt = Metatron(content=content, schemas=['og', 'twitter'])
         mt.traverse()
-        pprint(mt)
         assert 'twitter' in mt
         assert 'og' in mt
         assert mt['og']['image'] == '//m.files.bbci.co.uk/modules/bbc-morph-news-waf-page-meta/2.1.0/bbc_news_logo.png'
