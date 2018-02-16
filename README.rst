@@ -5,13 +5,24 @@ HTML Meta tag parser, with emphasis on OpenGraph/Twitter Cards, and
 complex meta tag schemes. Supports Python 3.x and up. The Metatron
 object extends dict, and all the meta tag data is set within it.
 
+
+https://pypi.python.org/pypi/metatron
+
+Installation
+------------
+You know the drill:
+
+::
+    pip install metatron
+
+
 Straight to an example
 ----------------------
 
 Simple meta tag collector
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
-This example collects top level meta tags without a scheme:
+This example collects top level meta tags without a schema:
 
 ::
 
@@ -107,6 +118,34 @@ Supports opengraph arrays (and can receive content as input)
         }
     }
 
+Add your own meta tag schema
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+You can provide Metatron with your own meta tag schema spec:
+::
+    > from metatron import add_schema_spec
+    > my_spec = {
+        'name': 'boom',
+        'attribute': 'name',
+        'value': 'value'
+    }
+    > add_schema_spec(my_spec)
+
+You can then parse tags like:
+::
+    <meta name="boom:title" value="Boom title" />
+    <meta name="boom:description" value="Boom description" />
+
+Using
+::
+    > mt = Metatron(url='http://example.com', schemas=['boom'])
+    > mt.traverse()
+    > {
+        'boom': {
+            'title': 'Boom title',
+            'description': 'Boom description'
+        }
+    }
+
 Run from the command line
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -126,3 +165,4 @@ Dependencies
 
 -  requests
 -  beautifulsoup4
+
