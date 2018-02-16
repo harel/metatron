@@ -14,6 +14,7 @@ Installation
 You know the drill:
 
 ::
+
     pip install metatron
 
 
