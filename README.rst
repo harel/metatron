@@ -1,12 +1,13 @@
-metatron
+.. image:: https://badge.fury.io/py/metatron.svg
+    :target: https://badge.fury.io/py/metatron
+
+Metatron
 ========
 
 HTML Meta tag parser, with emphasis on OpenGraph/Twitter Cards, and
-complex meta tag schemes. Supports Python 3.x and up. The Metatron
-object extends dict, and all the meta tag data is set within it.
+complex (and custom) meta tag schemes. Supports Python 3.x and up.
+The Metatron object extends dict, and all the meta tag data is set within it.
 
-
-https://pypi.python.org/pypi/metatron
 
 Installation
 ------------
@@ -146,7 +147,7 @@ Using
         }
     }
 
-Run from the command line
+Can run from the command line
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ::
@@ -158,11 +159,21 @@ Run from the command line
     $ python -m metatron.metatron http://bbc.co.uk/news og
 
     $ Getting: http://bbc.co.uk/news (schemas: og)
-    {'og': {'section': 'Home', 'type': 'website', 'site_name': 'BBC News', 'image': '//m.files.bbci.co.uk/modules/bbc-morph-news-waf-page-meta/2.2.1/bbc_news_logo.png', 'locale': 'en_GB', 'url': 'http://www.bbc.co.uk/news', 'title': 'Home - BBC News', 'description': 'Visit BBC News for up-to-the-minute news, breaking news, video, audio and feature stories. BBC News provides trusted World and UK news as well as local and regional perspectives. Also entertainment, business, science, technology and health news.'}}
+    {'og': {'description': 'Visit BBC News for up-to-the-minute news, breaking '
+                       'news, video, audio and feature stories. BBC News '
+                       'provides trusted World and UK news as well as local '
+                       'and regional perspectives. Also entertainment, '
+                       'business, science, technology and health news.',
+        'image': '//m.files.bbci.co.uk/modules/bbc-morph-news-waf-page-meta/2.2.1/bbc_news_logo.png',
+        'locale': 'en_GB',
+        'section': 'Home',
+        'site_name': 'BBC News',
+        'title': 'Home - BBC News',
+        'type': 'website',
+        'url': 'http://www.bbc.co.uk/news'}}
 
 Dependencies
 ^^^^^^^^^^^^
 
 -  requests
 -  beautifulsoup4
-

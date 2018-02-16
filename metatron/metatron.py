@@ -9,6 +9,7 @@ from sys import argv
 from bs4 import BeautifulSoup
 from functools import singledispatch
 from metatron.schemas import SCHEMAS
+from pprint import pprint
 
 
 # a single dispatch to normalise schema argument into a list
@@ -189,4 +190,4 @@ if __name__ == '__main__':
         print("Getting: {0} (schema: {1})".format(url, schemas))
         mt = Metatron(url=url, schemas=schemas)
         mt.traverse()
-        print(mt)
+        pprint(mt)
