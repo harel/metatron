@@ -13,14 +13,15 @@ setup(
     description='Python 3 HTML meta tag parser, with emphasis on complex meta tag structures '
                 'with support for OpenGraph and Twitter Card tags, including array handling',
     long_description=long_description,
+    long_description_content_type='text/x-rst',
     author='Harel Malka',
     author_email='harel@harelmalka.com',
     url='https://github.com/harel/metatron',
-    download_url='https://github.com/harel/metatron/archive/0.1.tar.gz',
+    download_url='https://github.com/harel/metatron/archive/0.3.tar.gz',
     keywords='html meta parser opengraph twittercard',
     install_requires=[
-        'beautifulsoup4==4.6.0',
-        'requests==2.18.4',
+        'beautifulsoup4',
+        'requests',
     ],
     license='MIT',
     packages=find_packages(exclude=['contrib', 'docs', 'tests']),

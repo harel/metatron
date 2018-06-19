@@ -1,6 +1,6 @@
 SHELL := /bin/bash
 APPLICATION_NAME="Metatron"
-APPLICATION_VERSION=0.1
+APPLICATION_VERSION=0.3
 
 # Colour coding for output
 COLOUR_NONE=\033[0m
