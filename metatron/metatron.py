@@ -23,13 +23,13 @@ def _(schemas):
     return [schemas]
 
 
-def add_schema_spec(spec):
+def add_schema_spec(spec, spec_name=None):
     """
     Register a custom schema
     """
     if not validate_schema_spec(spec):
         raise Exception('Invalid schema spec. name, attribute and value keys are required')
-    spec_tag = spec.get('name')
+    spec_tag = spec_name or spec.get('name')
     SCHEMAS[spec_tag] = spec
 
 
@@ -79,9 +79,11 @@ class Metatron(dict):
         tags = {}
         for schema in self.schemas:
             _spec = SCHEMAS[schema]
-            schema_regex = self.get_schema_regex(schema)
+            tag_name = _spec.get('tag', 'meta')
+            schema_name = _spec.get('name')
+            schema_regex = self.get_schema_regex(schema_name)
             find_attrs = {_spec['attribute']: re.compile(schema_regex)}
-            tags[schema] = soup.find_all('meta', attrs=find_attrs)
+            tags[schema] = soup.find_all(tag_name, attrs=find_attrs)
         return tags
 
     def name_path(self, tag, spec):
@@ -92,7 +94,10 @@ class Metatron(dict):
         To:
             ['image', 'secure_url']
         """
-        meta_name = tag[spec['attribute']].split(spec.get('separator', ':'))
+        _name_value = tag[spec['attribute']] 
+        if isinstance(_name_value, list) and len(_name_value) == 1:
+            _name_value = _name_value[0]
+        meta_name = _name_value.split(spec.get('separator', ':'))
         if spec.get('name', '') in meta_name:
             meta_name.remove(spec.get('name', ''))
         return meta_name

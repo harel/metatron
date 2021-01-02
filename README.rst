@@ -148,8 +148,41 @@ Using
         }
     }
 
+Note that the `add_schema_spec` call allows for an additional argument to tag the schema as. 
+This is useful if you have multiple schema definitions with the same name (or no name).
+
+Custom schema - custom tag
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+It is possible to add a `tag` key to the custom schema spec, 
+which can then lookup different tags other than `meta`. 
+If not provided, `meta` is used by default. 
+
+__Added in 0.4__
+
+::
+    > from metatron import add_schema_spec
+    > my_spec = {
+        'tag': 'link',
+        'name': '',
+        'attribute': 'rel',
+        'value': 'href'
+    }
+    > # Register the schema as 'link' to avoid duplicating existing no-name schema
+    > add_schema_spec(my_spec, 'link')
+    > content = """  
+        <meta property="og:title" content="First title tag" />  
+        <meta property="og::title" content="Second title tag" />  
+        <meta property="og:description" content="description tag" />  
+        <meta property="og:image" content="http://example.com/image.jpg" />  
+          
+        <link rel="canonical" href="https://example.com/cannonicallink/" />  
+    """                                                                               
+    > mt = Metatron(content=content, schemas=['link']) 
+    > mt.traverse()
+
+
 Can run from the command line
-^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ::
 
