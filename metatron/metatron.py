@@ -132,7 +132,7 @@ class Metatron(dict):
         meta_name, root = self.tag_parts(tag, spec)
         if root:
             meta_name.remove(root)
-        tag_value = tag[spec['value']]
+        tag_value = tag.get(spec['value'])
         tag_key = separator.join(meta_name)
         return tag_key, tag_value, root
 
