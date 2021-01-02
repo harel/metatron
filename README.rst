@@ -122,8 +122,10 @@ Supports opengraph arrays (and can receive content as input)
 
 Add your own meta tag schema
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-You can provide Metatron with your own meta tag schema spec:
+You can provide Metatron with your own meta tag schema spec
+
 ::
+
     > from metatron import add_schema_spec
     > my_spec = {
         'name': 'boom',
@@ -133,12 +135,16 @@ You can provide Metatron with your own meta tag schema spec:
     > add_schema_spec(my_spec)
 
 You can then parse tags like:
+
 ::
+
     <meta name="boom:title" value="Boom title" />
     <meta name="boom:description" value="Boom description" />
 
 Using
+
 ::
+
     > mt = Metatron(url='http://example.com', schemas=['boom'])
     > mt.traverse()
     > {
@@ -148,18 +154,19 @@ Using
         }
     }
 
-Note that the `add_schema_spec` call allows for an additional argument to tag the schema as. 
+Note that the `add_schema_spec` call allows for an additional argument to tag the schema as.
 This is useful if you have multiple schema definitions with the same name (or no name).
 
 Custom schema - custom tag
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
-It is possible to add a `tag` key to the custom schema spec, 
-which can then lookup different tags other than `meta`. 
-If not provided, `meta` is used by default. 
+It is possible to add a `tag` key to the custom schema spec,
+which can then lookup different tags other than `meta`.
+If not provided, `meta` is used by default.
 
-__Added in 0.4__
+*Added in 0.4*
 
 ::
+
     > from metatron import add_schema_spec
     > my_spec = {
         'tag': 'link',
@@ -169,15 +176,15 @@ __Added in 0.4__
     }
     > # Register the schema as 'link' to avoid duplicating existing no-name schema
     > add_schema_spec(my_spec, 'link')
-    > content = """  
-        <meta property="og:title" content="First title tag" />  
-        <meta property="og::title" content="Second title tag" />  
-        <meta property="og:description" content="description tag" />  
-        <meta property="og:image" content="http://example.com/image.jpg" />  
-          
-        <link rel="canonical" href="https://example.com/cannonicallink/" />  
-    """                                                                               
-    > mt = Metatron(content=content, schemas=['link']) 
+    > content = """
+        <meta property="og:title" content="First title tag" />
+        <meta property="og::title" content="Second title tag" />
+        <meta property="og:description" content="description tag" />
+        <meta property="og:image" content="http://example.com/image.jpg" />
+
+        <link rel="canonical" href="https://example.com/cannonicallink/" />
+    """
+    > mt = Metatron(content=content, schemas=['link'])
     > mt.traverse()
 
 
