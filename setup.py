@@ -17,7 +17,7 @@ setup(
     author='Harel Malka',
     author_email='harel@harelmalka.com',
     url='https://github.com/harel/metatron',
-    download_url='https://github.com/harel/metatron/archive/0.3.tar.gz',
+    download_url='https://github.com/harel/metatron/archive/0.5.tar.gz',
     keywords='html meta parser opengraph twittercard',
     install_requires=[
         'beautifulsoup4',
